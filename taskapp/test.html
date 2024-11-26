@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chat</title>
+    <!-- <script>
+        // This will run when the document is fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            // Create a new WebSocket connection
+            const chatSocket = new WebSocket('ws://192.168.43.44:8000/ws/chat/');
+
+            // Handle the connection open event
+            chatSocket.onopen = function (e) {
+                console.log("WebSocket connection established.");
+            };
+
+            // Handle errors
+            chatSocket.onerror = function (e) {
+                console.error("WebSocket connection error:", e);
+            };
+
+            // Handle connection close event
+            chatSocket.onclose = function (e) {
+                console.log("WebSocket connection closed.");
+            };
+
+            // Handle incoming messages
+            chatSocket.onmessage = function (e) {
+                const messageData = JSON.parse(e.data);
+                displayMessage(messageData);
+            };
+
+            // Function to display messages
+            const displayMessage = (data) => {
+                const messagesContainer = document.getElementById('messages');
+                const messageElement = document.createElement('div');
+                messageElement.textContent = `${data.sender}: ${data.message} (sent at ${data.timestamp})`;
+                messagesContainer.appendChild(messageElement);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to the bottom
+            };
+
+            // Function to send a message
+            const sendMessage = async () => {
+                const messageInput = document.getElementById('message-input');
+                const messageContent = messageInput.value;
+
+                if (!messageContent) {
+                    alert("Message cannot be empty");
+                    return;
+                }
+
+                const senderId = "66e16a3e900a109c9c84ae2b"; // Replace with actual sender ID
+                const receiverId = "66e154f179594bac378fc687"; // Replace with actual receiver ID
+
+                const payload = {
+                    sender_id: senderId,
+                    receiver_id: receiverId,
+                    message: messageContent,
+                    file: null, // If you're attaching files, handle it accordingly
+                    id_sender: senderId
+                };
+
+                try {
+                    const csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]').value; // Retrieve CSRF token
+                    const response = await fetch('http://192.168.43.44:8000/send_message/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrf_token // Include CSRF token if needed
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const data = await response.json();
+                    if (response.ok) {
+                        // Append message to chat box
+                        displayMessage(data);
+                        messageInput.value = ''; // Clear input
+                        // Send message via WebSocket
+                        chatSocket.send(JSON.stringify(data)); // Sending the message to WebSocket server
+                    } else {
+                        alert(data.error);
+                    }
+                } catch (error) {
+                    console.error("Error sending message:", error);
+                    alert("An error occurred while sending the message.");
+                }
+            };
+
+            document.getElementById('send-button').addEventListener('click', sendMessage);
+        <!-- }); -->
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #chat-box {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #messages {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        #message-input {
+            width: 80%;
+            padding: 10px;
+        }
+
+        #send-button {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="chat-box">
+        <h2>Chat with Co-Workers</h2>
+        <div id="messages"></div>
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}"> <!-- CSRF token -->
+        <input type="text" id="message-input" placeholder="Type your message..." />
+        <button id="send-button">Send</button>
+    </div>
+
+</body>
+
+</html> -->
